@@ -4,7 +4,7 @@ package de.thedead2.minecraft_tales;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 
-@Mod(Constants.MOD_ID)
+@Mod(MTGlobalConstants.MOD_ID)
 public class Minecraft_tales {
 
     public Minecraft_tales(IEventBus eventBus) {
@@ -13,7 +13,7 @@ public class Minecraft_tales {
         // project.
 
         // Use NeoForge to bootstrap the Common mod.
-        Constants.LOG.info("Hello NeoForge world!");
-        CommonClass.init();
+        MTGlobalConstants.LOGGER.info("Hello NeoForge world!");
+        MTMainInitiator.init();
     }
 }

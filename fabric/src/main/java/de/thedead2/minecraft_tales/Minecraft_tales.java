@@ -12,7 +12,7 @@ public class Minecraft_tales implements ModInitializer {
         // project.
 
         // Use Fabric to bootstrap the Common mod.
-        Constants.LOG.info("Hello Fabric world!");
-        CommonClass.init();
+        MTGlobalConstants.LOGGER.info("Hello Fabric world!");
+        MTMainInitiator.init();
     }
 }
