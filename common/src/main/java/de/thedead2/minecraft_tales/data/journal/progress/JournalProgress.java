@@ -41,6 +41,14 @@ public abstract class JournalProgress {
         return visibleEntries;
     }
 
+    public void add(JournalEntry entry) {
+        this.visibleEntries.add(entry);
+    }
+
+    public boolean isVisible() {
+        return !this.visibleEntries.isEmpty();
+    }
+
 
     public abstract JournalProgressType<?> getType();
 

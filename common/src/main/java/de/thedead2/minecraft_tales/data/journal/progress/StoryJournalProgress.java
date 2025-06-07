@@ -21,7 +21,7 @@ public final class StoryJournalProgress extends JournalProgress {
 
     private final List<ResourceLocation> completedQuests;
 
-    private final boolean rewarded;
+    private boolean rewarded;
 
 
     public StoryJournalProgress(ResourceLocation chapterId, List<JournalEntry> visibleEntries, List<ResourceLocation> completedQuests, boolean rewarded) {
@@ -57,4 +57,11 @@ public final class StoryJournalProgress extends JournalProgress {
     }
 
 
+    public void setRewarded(boolean rewarded) {
+        this.rewarded = rewarded;
+    }
+
+    public void completedQuest(ResourceLocation questId) {
+        this.completedQuests.add(questId);
+    }
 }

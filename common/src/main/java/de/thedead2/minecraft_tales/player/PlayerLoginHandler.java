@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 
-class PlayerLoginHandler {
+public class PlayerLoginHandler {
 
     @SuppressWarnings("unchecked")
     private static final UnboundedMapCodec<UUID, List<DeferrableActions.DeferrableActionInstance<?>>> mapCodec = (UnboundedMapCodec<UUID, List<DeferrableActions.DeferrableActionInstance<?>>>) (Object) Codec.unboundedMap(UUIDUtil.CODEC, DeferrableActions.DeferrableActionInstance.CODEC.listOf());

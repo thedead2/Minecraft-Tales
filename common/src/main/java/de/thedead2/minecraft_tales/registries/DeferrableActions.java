@@ -10,6 +10,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.Objects;
+
 
 public class DeferrableActions {
     private static final Registry<RegisteredAction<?>> ACTION_REGISTRY = new MappedRegistry<>(ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(MTGlobalConstants.MOD_ID, "deferrable_actions_registry")), Lifecycle.stable());
@@ -46,14 +48,74 @@ public class DeferrableActions {
     }
 
 
-    public record RegisteredAction<T>(ResourceLocation id, DeferrableAction<T> action, Codec<T> argsCodec) implements DeferrableAction<T> {
+    public static final class RegisteredAction<T> implements DeferrableAction<T> {
 
-        public boolean execute(MTPlayer player, T arg) {
-            return this.action.execute(player, arg);
+        private final ResourceLocation id;
+
+        private final DeferrableAction<T> action;
+
+        private final Codec<T> argsCodec;
+
+
+        RegisteredAction(ResourceLocation id, DeferrableAction<T> action, Codec<T> argsCodec) {
+            this.id = id;
+            this.action = action;
+            this.argsCodec = argsCodec;
         }
 
+
+        public boolean execute(MTPlayer player, T arg) {
+                return this.action.execute(player, arg);
+            }
+
+
         public DeferrableActionInstance<T> asInstance(T arg) {
-            return new DeferrableActionInstance<>(this, arg);
+                return new DeferrableActionInstance<>(this, arg);
+            }
+
+
+        public ResourceLocation id() {
+            return id;
+        }
+
+
+        public DeferrableAction<T> action() {
+            return action;
+        }
+
+
+        public Codec<T> argsCodec() {
+            return argsCodec;
+        }
+
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == this) {
+                return true;
+            }
+            if (obj == null || obj.getClass() != this.getClass()) {
+                return false;
+            }
+            var that = (RegisteredAction<?>) obj;
+            return Objects.equals(this.id, that.id) &&
+                    Objects.equals(this.action, that.action) &&
+                    Objects.equals(this.argsCodec, that.argsCodec);
+        }
+
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id, action, argsCodec);
+        }
+
+
+        @Override
+        public String toString() {
+            return "RegisteredAction[" +
+                    "id=" + id + ", " +
+                    "action=" + action + ", " +
+                    "argsCodec=" + argsCodec + ']';
         }
     }
 
@@ -74,7 +136,7 @@ public class DeferrableActions {
         private final T actionArg;
 
 
-        public DeferrableActionInstance(RegisteredAction<T> deferrableAction, T actionArg) {
+        DeferrableActionInstance(RegisteredAction<T> deferrableAction, T actionArg) {
             this.deferrableAction = deferrableAction;
             this.actionArg = actionArg;
         }

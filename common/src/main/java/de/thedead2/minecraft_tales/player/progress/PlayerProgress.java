@@ -2,6 +2,7 @@ package de.thedead2.minecraft_tales.player.progress;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.thedead2.minecraft_tales.data.story.StoryProgress;
 import de.thedead2.minecraft_tales.util.helper.SerializationHelper;
 
 import java.util.UUID;
@@ -23,7 +24,7 @@ public class PlayerProgress {
 
 
     public PlayerProgress(UUID playerId) {
-        this(playerId, new PlayerStoryProgress(), new PlayerQuestProgress(), new PlayerJournalProgress());
+        this(playerId, new PlayerStoryProgress(new StoryProgress(), playerId), new PlayerQuestProgress(), new PlayerJournalProgress());
     }
 
     private PlayerProgress(UUID playerId, PlayerStoryProgress storyProgress, PlayerQuestProgress questProgress, PlayerJournalProgress journalProgress) {

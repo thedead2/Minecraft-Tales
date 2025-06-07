@@ -34,7 +34,7 @@ public class PlayerDataManager {
 
     MTPlayer loadPlayerData(Player player, File playerDataFile) throws IOException {
         MTPlayer mtPlayer = MTPlayer.loadFromFile(player, playerDataFile);
-        mtPlayers.put(mtPlayer.getUUID(), mtPlayer);
+        this.mtPlayers.put(mtPlayer.getUUID(), mtPlayer);
 
         return mtPlayer;
     }
@@ -54,7 +54,7 @@ public class PlayerDataManager {
     }
 
 
-    PlayerLoginHandler getPlayerLoginHandler() {
+    public PlayerLoginHandler getPlayerLoginHandler() {
         return playerLoginHandler;
     }
 
@@ -177,7 +177,9 @@ public class PlayerDataManager {
 
 
     public void clearPlayerData(UUID playerId) {
-        mtPlayers.remove(playerId);
+        MTPlayer player = this.mtPlayers.remove(playerId);
+
+        player.getStoryProgressHandler().stop();
     }
 
 

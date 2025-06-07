@@ -1,6 +1,7 @@
 package de.thedead2.minecraft_tales.player;
 
 import de.thedead2.minecraft_tales.MTGlobalConstants;
+import de.thedead2.minecraft_tales.data.quests.StoryQuest;
 import de.thedead2.minecraft_tales.player.progress.PlayerProgress;
 import de.thedead2.minecraft_tales.registries.DeferrableActions;
 
@@ -40,6 +41,12 @@ public class DeferrablePlayerActions {
                 player.setProgress(new PlayerProgress(player.getUUID()));
             }
         }
+
+        return true;
+    });
+
+    public static final DeferrableActions.RegisteredAction<StoryQuest> REWARD_PLAYER = DeferrableActions.register("reward_player", StoryQuest.CODEC, (player, arg) -> {
+        arg.rewardPlayer(player);
 
         return true;
     });

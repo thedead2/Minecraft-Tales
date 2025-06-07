@@ -38,6 +38,12 @@ public abstract class JournalChapter {
         return icon;
     }
 
+
+    public List<JournalEntry> getEntries() {
+        return entries;
+    }
+
+
     public abstract JournalType<?> getType();
 
     protected PartialSerializationResult wrapPartial() {

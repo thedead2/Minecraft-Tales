@@ -24,4 +24,9 @@ public interface MTInstance {
 
     @Nullable
     PlayerTeam getTeam(ResourceLocation teamId);
+
+
+    default MTPlayer getPlayerData(Player player) {
+        return getPlayerData(player.getUUID());
+    }
 }

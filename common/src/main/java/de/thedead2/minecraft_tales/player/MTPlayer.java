@@ -3,6 +3,7 @@ package de.thedead2.minecraft_tales.player;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.thedead2.minecraft_tales.MTMainInitiator;
+import de.thedead2.minecraft_tales.data.story.StoryProgressHandler;
 import de.thedead2.minecraft_tales.player.progress.PlayerProgress;
 import de.thedead2.minecraft_tales.util.helper.IOHelper;
 import de.thedead2.minecraft_tales.util.helper.SerializationHelper;
@@ -162,5 +163,10 @@ public class MTPlayer {
 
     void setProgress(PlayerProgress playerProgress) {
         this.progress = playerProgress;
+    }
+
+
+    public StoryProgressHandler getStoryProgressHandler() {
+        return this.progress.getStoryProgress().getStoryProgressHandler();
     }
 }
